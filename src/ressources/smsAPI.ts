@@ -26,24 +26,6 @@ const post_send_sms = async (
     });
   }
 
-  if (
-    !input_data.account_sid ||
-    !input_data.auth_token ||
-    !input_data.auth_user ||
-    !input_data.sms_to
-  ) {
-    return res.status(400).json({
-      error: "You are missing one of the variables you need to send a sms.",
-    });
-  }
-  if (!input_data.sms_from && !input_data.messaging_service_sid) {
-    return res.status(400).json({
-      error:
-        "You need to provide either a 'sms_from' number or a " +
-        "'messaging_service_sid' to send a sms.",
-    });
-  }
-
   // handle request
   const send_result = await sms_controller.send_sms(req.body.input);
 
